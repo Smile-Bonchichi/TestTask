@@ -1,6 +1,7 @@
 package com.company.TestTask.entity;
 
 import com.company.TestTask.entity.base.BaseEntity;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

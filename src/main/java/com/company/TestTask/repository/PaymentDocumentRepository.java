@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PaymentDocumentRepository extends JpaRepository<PaymentDocument, Long> {
-    @Query(nativeQuery = true, value = "SELECT t.* FROM payment_documents t WHERE t.document_number = :documentNumber AND t.type = :type")
+    @Query(nativeQuery = true, value =
+            "SELECT t.* FROM payment_documents t " +
+                    "WHERE t.document_number = :documentNumber AND t.type = :type")
     PaymentDocument getByDocumentNumber(@Param("documentNumber") String documentNumber, @Param("type") String type);
 }
