@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PaymentDocument extends BaseEntity {
-    @Column(name = "document_number", unique = true, nullable = false)
+    @Column(name = "document_number", nullable = false)
     String documentNumber;
 
     @Column(name = "type", nullable = false)
@@ -34,18 +34,18 @@ public class PaymentDocument extends BaseEntity {
     @Column(name = "currency", nullable = false)
     String currency;
 
-    @Column(name = "account_code", nullable = false) //счет куда зачисляют ДС
-    String accountCode;
+    @Column(name = "recipient_account", nullable = false)
+    String recipientAccount;
 
-    @Column(name = "client_code", nullable = false) //счет откуда приходят ДС
-    String clientCode;
-
-    @Column(name = "inn", nullable = false)
-    String inn;
+    @Column(name = "payer_account", nullable = false)
+    String payerAccount;
 
     @Column(name = "status")
     Long status;
 
     @Column(name = "input_date", nullable = false)
     LocalDateTime inputDate;
+
+    @Column(name = "request_body", nullable = false)
+    String requestBody;
 }

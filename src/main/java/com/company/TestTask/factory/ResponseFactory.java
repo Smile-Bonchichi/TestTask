@@ -3,16 +3,10 @@ package com.company.TestTask.factory;
 import com.company.TestTask.dto.response.Response;
 import com.company.TestTask.enums.Result;
 
-import lombok.AccessLevel;
-import lombok.experimental.FieldDefaults;
-
 import org.springframework.stereotype.Component;
 
 @Component
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ResponseFactory {
-    final Response response = new Response();
-
     public Response getInvalidDetailsResponse() {
         return Response.builder()
                 .code(Result.INVALID_DETAILS.getErrorId())
@@ -34,10 +28,24 @@ public class ResponseFactory {
                 .build();
     }
 
+    public Response getFailPaymentResponse() {
+        return Response.builder()
+                .code(Result.FAIL_PAYMENT.getErrorId())
+                .description(Result.FAIL_PAYMENT.getDescription())
+                .build();
+    }
+
     public Response getNotHaveAmountOnAccountResponse() {
         return Response.builder()
                 .code(Result.AMOUNT_GREATER_ZERO.getErrorId())
                 .description(Result.AMOUNT_GREATER_ZERO.getDescription())
+                .build();
+    }
+
+    public Response getInvalidLoginOrPasswordResponse() {
+        return Response.builder()
+                .code(Result.WRONG_LOGIN_OR_PASSWORD.getErrorId())
+                .description(Result.WRONG_LOGIN_OR_PASSWORD.getDescription())
                 .build();
     }
 }

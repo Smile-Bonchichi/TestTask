@@ -1,6 +1,7 @@
 package com.company.TestTask.entity;
 
 import com.company.TestTask.entity.base.BaseEntity;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -9,7 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "supplier") //кто отправляет
+@Table(name = "suppliers") //кто отправляет
 @Setter
 @Getter
 @AllArgsConstructor
@@ -24,6 +25,9 @@ public class Supplier extends BaseEntity {
     @Column(name = "supplier_code", unique = true, nullable = false)
     String supplierCode;
 
-    @Column(name = "supplier_status", nullable = false)
-    String supplierStatus;
+    @Column(name = "password", nullable = false)
+    String password;
+
+    @Column(name = "is_active", nullable = false)
+    Long isActive;
 }

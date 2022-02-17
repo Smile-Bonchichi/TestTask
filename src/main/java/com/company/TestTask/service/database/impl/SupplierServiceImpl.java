@@ -9,9 +9,9 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SupplierServiceImpl extends CrudServiceImpl<Supplier> implements SupplierService {
     @Autowired

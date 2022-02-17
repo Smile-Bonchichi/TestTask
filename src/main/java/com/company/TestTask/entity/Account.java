@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "account")
+@Table(name = "accounts")
 @Setter
 @Getter
 @AllArgsConstructor
@@ -27,9 +27,15 @@ public class Account extends BaseEntity {
     @Column(name = "amount", nullable = false)
     BigDecimal amount;
 
+    @Column(name = "full_name", nullable = false)
+    String fullName;
+
     @Column(name = "inn", unique = true, nullable = false)
     String inn;
 
-    @Column(name = "status_account", unique = true, nullable = false)
-    Boolean statusAcoount;
+    @Column(name = "currency", nullable = false)
+    String currency;
+
+    @Column(name = "status_account", nullable = false)
+    String statusAccount;
 }

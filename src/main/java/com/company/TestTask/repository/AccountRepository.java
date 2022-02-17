@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
     @Query(nativeQuery = true, value =
-            "SELECT t.* FROM account t " +
+            "SELECT t.* FROM accounts t " +
                     "WHERE t.account_code = :accountCode ")
-    Account findAccountByAccountCode(@Param(":accountCode") String accountCode);
+    Account findAccountByAccountCode(@Param("accountCode") String accountCode);
 }

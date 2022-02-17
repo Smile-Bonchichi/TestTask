@@ -3,6 +3,7 @@ package com.company.TestTask.service.util.impl;
 import com.company.TestTask.dto.request.Request;
 import com.company.TestTask.dto.request.SupplierDto;
 import com.company.TestTask.entity.Account;
+import com.company.TestTask.entity.Supplier;
 import com.company.TestTask.service.database.AccountService;
 import com.company.TestTask.service.database.SupplierService;
 import com.company.TestTask.service.util.ValidateService;
@@ -27,14 +28,13 @@ public class ValidateServiceImpl implements ValidateService {
     @Override
     public boolean checkParams(Request request) {
         return request.getSupplier() == null ||
-                request.getSupplier().getName() == null ||
+                request.getSupplier().getSupplierName() == null ||
 
                 request.getPayParams() == null ||
                 request.getPayParams().getDocumentNumber() == null ||
                 request.getPayParams().getAmount() == null ||
                 request.getPayParams().getCurrency() == null ||
-                request.getPayParams().getAccountCode() == null ||
-                request.getPayParams().getInn() == null;
+                request.getPayParams().getAccountCode() == null;
     }
 
     @Override
@@ -44,14 +44,15 @@ public class ValidateServiceImpl implements ValidateService {
 
     @Override
     public boolean checkSupplier(SupplierDto supplierDto) {
-        return supplierService.getBySupplierByName(supplierDto.getName()) == null;
+        Supplier supplier = supplierService.getBySupplierByName(supplierDto.getSupplierName());
+        return supplier == null || supplier.getIsActive() == 0;
     }
 
     @Override
-    public boolean checkHavingAmountOnSupplier(SupplierDto supplierDto) {
-        Account account = accountService.getAccountByAccountCode(supplierDto.getName());
+    public boolean checkHavingAmountOnSupplier(String supplierName, BigDecimal amount) {
+        Account account = accountService.getAccountByAccountCode(supplierService.getBySupplierByName(supplierName).getSupplierCode());
         if (account == null)
             return false;
-        return account.getAmount().compareTo(BigDecimal.valueOf(0L)) >= 0;
+        return account.getAmount().compareTo(amount) <= 0;
     }
 }

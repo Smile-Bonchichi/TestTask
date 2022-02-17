@@ -18,6 +18,4 @@ public class PayParams {
     String currency;
 
     String accountCode;
-
-    String inn;
 }

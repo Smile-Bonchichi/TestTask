@@ -9,9 +9,9 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PaymentDocumentServiceImpl extends CrudServiceImpl<PaymentDocument> implements PaymentDocumentService {
     @Autowired
@@ -20,5 +20,10 @@ public class PaymentDocumentServiceImpl extends CrudServiceImpl<PaymentDocument>
     public PaymentDocumentServiceImpl(PaymentDocumentRepository paymentDocumentRepository) {
         super(paymentDocumentRepository);
         this.paymentDocumentRepository = paymentDocumentRepository;
+    }
+
+    @Override
+    public PaymentDocument getResponseBodyByDocumentNumber(String documentNumber, String type) {
+        return paymentDocumentRepository.getByDocumentNumber(documentNumber, type);
     }
 }
